@@ -7,7 +7,6 @@
 <!-- Configuração para o Link do WhatsApp (Prévia) -->
 <meta property="og:title" content="Momo, tenho uma pergunta... 💕">
 <meta property="og:description" content="Fiz isto para ti, abre aqui!">
-<!-- URL estável para a prévia do WhatsApp -->
 <meta property="og:image" content="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#ff54a4">
@@ -21,6 +20,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* --- SECÇÃO 1 --- */
@@ -44,7 +44,7 @@ body {
 .gif-box {
   width: 100%;
   max-width: 280px;
-  height: 200px; /* Mantém o espaço reservado para o gif */
+  height: 200px;
   margin: 0 auto 2rem auto;
   display: flex;
   justify-content: center;
@@ -109,11 +109,7 @@ body {
   animation: btnPulse 2s ease-in-out infinite;
   opacity: 0;
 }
-
-@keyframes btnPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
+.show-more-btn.visible { display: inline-block; }
 
 /* --- SECÇÃO 2 --- */
 #section2 {
@@ -269,9 +265,26 @@ body {
   to { transform: translate(var(--dx), var(--dy)) rotate(360deg); opacity: 0; }
 }
 
+/* fallback error banner */
+#errorBanner {
+  display: none;
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  top: 12px;
+  background: #ffe6ee;
+  color: #5a0020;
+  border: 1px solid #ffb3d1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  z-index: 9999;
+}
+#errorBanner.show { display: block; }
 </style>
 </head>
 <body>
+
+<div id="errorBanner" role="alert" aria-live="polite"></div>
 
 <!-- SECÇÃO 1 -->
 <section id="section1">
@@ -286,20 +299,20 @@ body {
     </div>
     <h1 class="question" id="q-text"> Você me ama momoooo? para Thaiza Rangel</h1>
     <div class="button-container" id="btns">
-      <button class="btn" id="yes-btn">Sim</button>
-      <button class="btn" id="no-btn">Não</button>
+      <button class="btn" id="yes-btn" aria-label="Sim">Sim</button>
+      <button class="btn" id="no-btn" aria-label="Não">Não</button>
     </div>
-    <button class="show-more-btn" id="more-btn">Aperte aqui 💕</button>
+    <button class="show-more-btn" id="more-btn" aria-hidden="true">Aperte aqui 💕</button>
   </div>
 </section>
 
 <!-- SECÇÃO 2 -->
-<section id="section2">
+<section id="section2" aria-hidden="true">
   <div class="scene-wrapper">
     <!-- Personagem Kawaii SVG (Mais seguro que imagem externa) -->
-    <div class="character-box body-float">
+    <div class="character-box body-float" aria-hidden="true">
       <div style="position: absolute; top: -30px; left: 80px; background: white; padding: 5px 12px; border-radius: 15px; border: 2px solid #ffb3d1; font-weight: 800; color: #ff54a4; font-size: 12px; box-shadow: 3px 3px 0 #ffb3d1;">Te AMO MOMOO!</div>
-      <svg class="kawaii-svg" viewBox="0 0 140 160">
+      <svg class="kawaii-svg" viewBox="0 0 140 160" aria-hidden="true" focusable="false">
         <ellipse cx="70" cy="150" rx="35" ry="6" fill="#000" opacity="0.05" />
         <path d="M40 100 Q70 85 100 100 V130 Q70 145 40 130 Z" fill="white" stroke="#333" stroke-width="3.5" />
         <circle cx="70" cy="65" r="45" fill="white" stroke="#333" stroke-width="3.5" />
@@ -321,15 +334,15 @@ body {
       </svg>
     </div>
 
-    <div class="heart-grid" id="hGrid"></div>
+    <div class="heart-grid" id="hGrid" aria-hidden="true"></div>
   </div>
 
   <div class="hint-text">CLICA EM QUALQUER LUGAR ✨</div>
 </section>
 
 <!-- CARD FINAL -->
-<div class="overlay" id="cardOverlay">
-  <div class="card">
+<div class="overlay" id="cardOverlay" aria-hidden="true">
+  <div class="card" role="dialog" aria-modal="true">
     <div style="font-size: 60px;">💌</div>
     <h2>Momooo, você e única!</h2>
     <p>O meu mundo é muito mais colorido contigo ao meu lado. Cada segundo é especial. ❤️</p>
@@ -338,93 +351,179 @@ body {
 </div>
 
 <script>
-const yesBtn = document.getElementById('yes-btn');
-const noBtn = document.getElementById('no-btn');
-const qText = document.getElementById('q-text');
-const mainGif = document.getElementById('main-gif');
-const moreBtn = document.getElementById('more-btn');
-const s1 = document.getElementById('section1');
-const s2 = document.getElementById('section2');
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
+    const qText = document.getElementById('q-text');
+    const mainGif = document.getElementById('main-gif');
+    const moreBtn = document.getElementById('more-btn');
+    const s1 = document.getElementById('section1');
+    const s2 = document.getElementById('section2');
+    const overlay = document.getElementById('cardOverlay');
+    const errorBanner = document.getElementById('errorBanner');
 
-function escape() {
-  noBtn.style.position = 'fixed';
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
-  noBtn.style.left = x + 'px';
-  noBtn.style.top = y + 'px';
-}
-noBtn.addEventListener('mouseover', escape);
-noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); escape(); });
+    // Função renomeada para evitar conflito com globals
+    function moveNoBtn() {
+      // tenta posicionar dentro da viewport, com margem para não fugir totalmente
+      const marginX = 80;
+      const marginY = 60;
+      const maxX = Math.max(window.innerWidth - marginX, 0);
+      const maxY = Math.max(window.innerHeight - marginY, 0);
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
 
-yesBtn.onclick = () => {
-  qText.innerText = "Eu sabia! Amo-te demais! ❤️";
-  // Muda para um gif de beijo ao aceitar
-  mainGif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
-  document.getElementById('btns').style.display = 'none';
-  moreBtn.style.display = 'block';
-  setTimeout(() => moreBtn.style.opacity = '1', 100);
-};
-
-moreBtn.onclick = () => {
-  s1.style.opacity = '0';
-  setTimeout(() => {
-    s1.style.display = 'none';
-    s2.classList.add('visible');
-    buildHeart();
-  }, 500);
-};
-
-function buildHeart() {
-  const pattern = [
-    [0,0,1,1,0,0,1,1,0,0],
-    [0,1,1,1,1,1,1,1,1,0],
-    [1,1,1,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,1,1,1],
-    [0,1,1,1,1,1,1,1,1,0],
-    [0,0,1,1,1,1,1,1,0,0],
-    [0,0,0,1,1,1,1,0,0,0],
-    [0,0,0,0,1,1,0,0,0,0]
-  ];
-  const grid = document.getElementById('hGrid');
-  grid.innerHTML = '';
-  pattern.forEach((row, ri) => {
-    const rDiv = document.createElement('div');
-    rDiv.className = 'heart-row';
-    row.forEach((cell, ci) => {
-      const span = document.createElement('span');
-      if(cell) {
-        span.className = 'h-unit';
-        span.innerText = '❤️';
-        span.style.animationDelay = (ri * 0.1 + ci * 0.05) + 's';
-      } else {
-        span.style.width = '24px';
-      }
-      rDiv.appendChild(span);
+    // Usa pointer events (compatível com mouse/touch/stylus) — mais robusto
+    noBtn.addEventListener('pointerenter', moveNoBtn);
+    noBtn.addEventListener('pointerdown', (ev) => {
+      // evita que o botão seja 'clicado' no toque — só mexe-o
+      moveNoBtn();
     });
-    grid.appendChild(rDiv);
-  });
-}
 
-s2.onclick = (e) => {
-  if(e.target.closest('.card')) return;
-  document.getElementById('cardOverlay').classList.add('show');
-  for(let i=0; i<8; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.innerText = ['🌸','✨','💖','💕'][Math.floor(Math.random()*4)];
-    p.style.left = e.clientX + 'px';
-    p.style.top = e.clientY + 'px';
-    p.style.setProperty('--dx', (Math.random()*300 - 150) + 'px');
-    p.style.setProperty('--dy', (Math.random()*300 - 150) + 'px');
-    p.style.animationDuration = (0.5 + Math.random()) + 's';
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 1500);
+    // Sim -> animação + mostrar botão "mais"
+    yesBtn.addEventListener('click', () => {
+      qText.innerText = "Eu sabia! Amo-te demais! ❤️";
+      mainGif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+      document.getElementById('btns').style.display = 'none';
+      moreBtn.classList.add('visible');
+      moreBtn.style.opacity = '1';
+      moreBtn.setAttribute('aria-hidden', 'false');
+    });
+
+    // Transição para secção 2
+    moreBtn.addEventListener('click', () => {
+      s1.style.opacity = '0';
+      setTimeout(() => {
+        s1.style.display = 'none';
+        s2.classList.add('visible');
+        s2.setAttribute('aria-hidden', 'false');
+        buildHeart();
+      }, 500);
+    });
+
+    // Gera coração de forma idempotente
+    function buildHeart() {
+      const pattern = [
+        [0,0,1,1,0,0,1,1,0,0],
+        [0,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1],
+        [0,1,1,1,1,1,1,1,1,0],
+        [0,0,1,1,1,1,1,1,0,0],
+        [0,0,0,1,1,1,1,0,0,0],
+        [0,0,0,0,1,1,0,0,0,0]
+      ];
+      const grid = document.getElementById('hGrid');
+      if(!grid) return;
+      grid.innerHTML = '';
+      pattern.forEach((row, ri) => {
+        const rDiv = document.createElement('div');
+        rDiv.className = 'heart-row';
+        row.forEach((cell, ci) => {
+          const span = document.createElement('span');
+          if(cell) {
+            span.className = 'h-unit';
+            span.innerText = '❤️';
+            span.style.animationDelay = (ri * 0.1 + ci * 0.05) + 's';
+          } else {
+            span.style.display = 'inline-block';
+            span.style.width = '24px';
+            span.style.height = '24px';
+          }
+          rDiv.appendChild(span);
+        });
+        grid.appendChild(rDiv);
+      });
+    }
+
+    // função utilitária para obter coordenadas do event (mouse / touch / pointer)
+    function getEventCoords(e) {
+      if (!e) return {x: window.innerWidth/2, y: window.innerHeight/2};
+      if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
+        return { x: e.clientX, y: e.clientY };
+      }
+      // touch event
+      if (e.touches && e.touches[0]) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+      if (e.changedTouches && e.changedTouches[0]) {
+        return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+      }
+      return { x: window.innerWidth/2, y: window.innerHeight/2 };
+    }
+
+    // Ao clicar na secção 2 — mostrar o card + partículas
+    s2.addEventListener('pointerdown', (e) => {
+      try {
+        // Se o clique estiver dentro do card, ignora
+        if (e.target && e.target.closest && e.target.closest('.card')) return;
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        const coords = getEventCoords(e);
+        for(let i=0; i<8; i++) {
+          const p = document.createElement('div');
+          p.className = 'particle';
+          p.style.left = coords.x + 'px';
+          p.style.top = coords.y + 'px';
+          p.style.setProperty('--dx', (Math.random()*300 - 150) + 'px');
+          p.style.setProperty('--dy', (Math.random()*300 - 150) + 'px');
+          p.style.animationDuration = (0.6 + Math.random()*1.2) + 's';
+          p.style.fontSize = (12 + Math.random()*10) + 'px';
+          p.innerText = ['🌸','✨','💖','💕'][Math.floor(Math.random()*4)];
+          document.body.appendChild(p);
+          // remover depois da animação para não poluir o DOM
+          setTimeout(() => {
+            if(p && p.remove) p.remove();
+          }, 1800);
+        }
+      } catch (err) {
+        console.error('Erro em s2 handler:', err);
+        showError('Ocorreu um problema ao gerar as partículas. Tenta recarregar a página.');
+      }
+    });
+
+    // fechar card
+    window.closeCard = function() {
+      overlay.classList.remove('show');
+      overlay.setAttribute('aria-hidden', 'true');
+    };
+
+    // fallback user-friendly em caso de erro crítico
+    function showError(msg) {
+      errorBanner.innerText = msg || 'Ocorreu um erro inesperado.';
+      errorBanner.classList.add('show');
+      // mostra secção 1 caso o resto não esteja visível
+      try {
+        s1.style.display = '';
+        s1.style.opacity = '1';
+      } catch(e){}
+    }
+
+    // reporta erros JS para UI (não mata a página)
+    window.addEventListener('error', function(evt){
+      console.error('Global error:', evt.error || evt.message);
+      showError('Algo deu errado. Vê o console para detalhes (F12).');
+    });
+
+    // catch unhandled rejections
+    window.addEventListener('unhandledrejection', function(evt){
+      console.error('Unhandled rejection:', evt.reason);
+      showError('Promessa rejeitada sem tratamento. Verifica o console (F12).');
+    });
+
+  } catch (outerErr) {
+    console.error('Erro inicialização:', outerErr);
+    const banner = document.getElementById('errorBanner');
+    if (banner) {
+      banner.innerText = 'Erro ao iniciar a página. Recarrega ou verifica o console (F12).';
+      banner.classList.add('show');
+    }
   }
-};
-
-function closeCard() {
-  document.getElementById('cardOverlay').classList.remove('show');
-}
+});
 </script>
 </body>
 </html>
