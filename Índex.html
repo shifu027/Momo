@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- Configuração para o Link do WhatsApp ficar bonito -->
+<meta property="og:title" content="Momo, tenho uma pergunta... 💕">
+<meta property="og:description" content="Fiz isto para ti, abre aqui!">
+<meta property="og:image" content="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif">
+<meta name="theme-color" content="#ff54a4">
+
+<title>💕 Amas-me momoooo?</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* --- SECÇÃO 1 --- */
+#section1 {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  transition: opacity 0.5s ease;
+}
+
+.question-container {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.local-gif {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto 2rem auto;
+}
+
+.question {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: #111;
+  font-weight: 800;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  min-height: 80px;
+}
+
+.btn {
+  border: none;
+  border-radius: 50px;
+  padding: 15px 35px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-color: #ff54a4;
+  color: white;
+  box-shadow: 0 6px 20px rgba(255,84,164,0.4);
+}
+
+#no-btn {
+  background-color: #f0f0f0;
+  color: #666;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.show-more-btn {
+  display: none;
+  margin: 30px auto 0;
+  background: linear-gradient(135deg, #ff54a4, #ff85b2);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 18px 45px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255,84,164,0.5);
+  animation: btnPulse 2s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes btnPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* --- SECÇÃO 2 --- */
+#section2 {
+  width: 100%;
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #fff0f6 0%, #ffe6f0 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+
+#section2.visible {
+  display: flex;
+  animation: fadeIn 1s ease both;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.scene-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  z-index: 2;
+}
+
+.character-box {
+  position: relative;
+  width: 150px;
+  height: 180px;
+}
+
+.kawaii-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.face-blush {
+  animation: blushAnim 3s infinite ease-in-out;
+}
+@keyframes blushAnim {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; transform: scale(1.1); }
+}
+
+.eye-blink {
+  animation: eyeBlink 4s infinite;
+  transform-origin: center;
+}
+@keyframes eyeBlink {
+  0%, 45%, 55%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+
+.hand-wave {
+  animation: waveHand 1.5s infinite ease-in-out;
+  transform-origin: 100px 105px;
+}
+@keyframes waveHand {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+.body-float {
+  animation: bodyFloat 3s infinite ease-in-out;
+}
+@keyframes bodyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.heart-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.heart-row {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.h-unit {
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: unitBeat 1.8s infinite ease-in-out;
+}
+
+@keyframes unitBeat {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; filter: drop-shadow(0 0 8px #ff54a4); }
+}
+
+/* --- OVERLAY CARD --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.overlay.show { opacity: 1; pointer-events: all; }
+
+.card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 35px;
+  text-align: center;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 25px 50px rgba(232,52,122,0.15);
+  transform: scale(0.8);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.overlay.show .card { transform: scale(1); }
+
+.card h2 { color: #ff54a4; margin: 15px 0 10px; font-size: 1.5rem; }
+.card p { color: #888; line-height: 1.6; font-size: 0.95rem; }
+
+.hint-text {
+  position: absolute;
+  bottom: 40px;
+  color: #ff85b2;
+  font-weight: 600;
+  font-size: 14px;
+  animation: hintFade 2s infinite;
+}
+@keyframes hintFade { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+  animation: partFloat linear forwards;
+}
+@keyframes partFloat {
+  to { transform: translate(var(--dx), var(--dy)) rotate(360deg); opacity: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- SECÇÃO 1 -->
+<section id="section1">
+  <div class="question-container">
+    <img src="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif" alt="Bubu Dudu" class="local-gif">
+    <h1 class="question" id="q-text">Amas-me momoooo?</h1>
+    <div class="button-container" id="btns">
+      <button class="btn" id="yes-btn">Sim</button>
+      <button class="btn" id="no-btn">Não</button>
+    </div>
+    <button class="show-more-btn" id="more-btn">Aperte aqui 💕</button>
+  </div>
+</section>
+
+<!-- SECÇÃO 2 -->
+<section id="section2">
+  <div class="scene-wrapper">
+    <!-- Personagem Kawaii -->
+    <div class="character-box body-float">
+      <div style="position: absolute; top: -30px; left: 80px; background: white; padding: 5px 12px; border-radius: 15px; border: 2px solid #ffb3d1; font-weight: 800; color: #ff54a4; font-size: 12px; box-shadow: 3px 3px 0 #ffb3d1;">Amo-te!</div>
+      <svg class="kawaii-svg" viewBox="0 0 140 160">
+        <ellipse cx="70" cy="150" rx="35" ry="6" fill="#000" opacity="0.05" />
+        <path d="M40 100 Q70 85 100 100 V130 Q70 145 40 130 Z" fill="white" stroke="#333" stroke-width="3.5" />
+        <circle cx="70" cy="65" r="45" fill="white" stroke="#333" stroke-width="3.5" />
+        <circle cx="35" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
+        <circle cx="105" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
+        <circle cx="35" cy="35" r="6" fill="#ffe3ee" />
+        <circle cx="105" cy="35" r="6" fill="#ffe3ee" />
+        <circle class="eye-blink" cx="55" cy="65" r="5" fill="#333" />
+        <circle class="eye-blink" cx="85" cy="65" r="5" fill="#333" />
+        <circle class="face-blush" cx="42" cy="78" r="8" fill="#ffb3d1" opacity="0.5" />
+        <circle class="face-blush" cx="98" cy="78" r="8" fill="#ffb3d1" opacity="0.5" />
+        <path d="M62 82 Q70 90 78 82" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round" />
+        <path d="M40 110 Q25 110 20 125" stroke="#333" stroke-width="3.5" fill="none" stroke-linecap="round" />
+        <g class="hand-wave">
+          <path d="M100 110 Q115 110 125 90" stroke="#333" stroke-width="3.5" fill="none" stroke-linecap="round" />
+          <circle cx="125" cy="85" r="7" fill="white" stroke="#333" stroke-width="3" />
+        </g>
+        <text x="70" y="125" text-anchor="middle" fill="#ff54a4" font-size="16">♥</text>
+      </svg>
+    </div>
+
+    <!-- Coração Central -->
+    <div class="heart-grid" id="hGrid"></div>
+  </div>
+
+  <div class="hint-text">CLICA EM QUALQUER LUGAR ✨</div>
+</section>
+
+<!-- CARD FINAL -->
+<div class="overlay" id="cardOverlay">
+  <div class="card">
+    <div style="font-size: 60px;">💌</div>
+    <h2>Momooo, és única!</h2>
+    <p>O meu mundo é muito mais colorido contigo ao meu lado. Cada segundo é especial. ❤️</p>
+    <button onclick="closeCard()" style="margin-top: 25px; border: none; background: #fff0f6; color: #ff54a4; padding: 10px 25px; border-radius: 20px; font-weight: 700; cursor: pointer;">Fechar</button>
+  </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById('yes-btn');
+const noBtn = document.getElementById('no-btn');
+const qText = document.getElementById('q-text');
+const moreBtn = document.getElementById('more-btn');
+const s1 = document.getElementById('section1');
+const s2 = document.getElementById('section2');
+
+function escape() {
+  noBtn.style.position = 'fixed';
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+  noBtn.style.left = x + 'px';
+  noBtn.style.top = y + 'px';
+}
+noBtn.addEventListener('mouseover', escape);
+noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); escape(); });
+
+yesBtn.onclick = () => {
+  qText.innerText = "Eu sabia! Amo-te demais! ❤️";
+  document.getElementById('btns').style.display = 'none';
+  moreBtn.style.display = 'block';
+  setTimeout(() => moreBtn.style.opacity = '1', 100);
+};
+
+moreBtn.onclick = () => {
+  s1.style.opacity = '0';
+  setTimeout(() => {
+    s1.style.display = 'none';
+    s2.classList.add('visible');
+    buildHeart();
+  }, 500);
+};
+
+function buildHeart() {
+  const pattern = [
+    [0,0,1,1,0,0,1,1,0,0],
+    [0,1,1,1,1,1,1,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,1,1,1,1,1,1,0],
+    [0,0,1,1,1,1,1,1,0,0],
+    [0,0,0,1,1,1,1,0,0,0],
+    [0,0,0,0,1,1,0,0,0,0]
+  ];
+  const grid = document.getElementById('hGrid');
+  pattern.forEach((row, ri) => {
+    const rDiv = document.createElement('div');
+    rDiv.className = 'heart-row';
+    row.forEach((cell, ci) => {
+      const span = document.createElement('span');
+      if(cell) {
+        span.className = 'h-unit';
+        span.innerText = '❤️';
+        span.style.animationDelay = (ri * 0.1 + ci * 0.05) + 's';
+      } else {
+        span.style.width = '24px';
+      }
+      rDiv.appendChild(span);
+    });
+    grid.appendChild(rDiv);
+  });
+}
+
+s2.onclick = (e) => {
+  if(e.target.closest('.card')) return;
+  document.getElementById('cardOverlay').classList.add('show');
+  for(let i=0; i<8; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.innerText = ['🌸','✨','💖','💕'][Math.floor(Math.random()*4)];
+    p.style.left = e.clientX + 'px';
+    p.style.top = e.clientY + 'px';
+    p.style.setProperty('--dx', (Math.random()*300 - 150) + 'px');
+    p.style.setProperty('--dy', (Math.random()*300 - 150) + 'px');
+    p.style.animationDuration = (0.5 + Math.random()) + 's';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1500);
+  }
+};
+
+function closeCard() {
+  document.getElementById('cardOverlay').classList.remove('show');
+}
+</script>
+</body>
+</html>
+
