@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<!-- Configuração para o Link do WhatsApp ficar bonito -->
+<!-- Configuração para o Link do WhatsApp (Prévia) -->
 <meta property="og:title" content="Momo, tenho uma pergunta... 💕">
 <meta property="og:description" content="Fiz isto para ti, abre aqui!">
+<!-- URL estável para a prévia do WhatsApp -->
 <meta property="og:image" content="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif">
+<meta property="og:type" content="website">
 <meta name="theme-color" content="#ff54a4">
 
 <title>💕 Amas-me momoooo?</title>
@@ -39,12 +41,21 @@ body {
   padding: 20px;
 }
 
-.local-gif {
+.gif-box {
   width: 100%;
   max-width: 280px;
-  border-radius: 20px;
-  display: block;
+  height: 200px; /* Mantém o espaço reservado para o gif */
   margin: 0 auto 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.local-gif {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: contain;
 }
 
 .question {
@@ -265,7 +276,14 @@ body {
 <!-- SECÇÃO 1 -->
 <section id="section1">
   <div class="question-container">
-    <img src="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif" alt="Bubu Dudu" class="local-gif">
+    <div class="gif-box">
+      <!-- GIF COM FALLBACK CASO FALHE O CARREGAMENTO -->
+      <img id="main-gif" 
+           src="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif" 
+           alt="Bubu Dudu" 
+           class="local-gif"
+           onerror="this.src='https://media.tenor.com/2U9G0yGkG9AAAAAi/love.gif'">
+    </div>
     <h1 class="question" id="q-text">Amas-me momoooo?</h1>
     <div class="button-container" id="btns">
       <button class="btn" id="yes-btn">Sim</button>
@@ -278,7 +296,7 @@ body {
 <!-- SECÇÃO 2 -->
 <section id="section2">
   <div class="scene-wrapper">
-    <!-- Personagem Kawaii -->
+    <!-- Personagem Kawaii SVG (Mais seguro que imagem externa) -->
     <div class="character-box body-float">
       <div style="position: absolute; top: -30px; left: 80px; background: white; padding: 5px 12px; border-radius: 15px; border: 2px solid #ffb3d1; font-weight: 800; color: #ff54a4; font-size: 12px; box-shadow: 3px 3px 0 #ffb3d1;">Amo-te!</div>
       <svg class="kawaii-svg" viewBox="0 0 140 160">
@@ -303,7 +321,6 @@ body {
       </svg>
     </div>
 
-    <!-- Coração Central -->
     <div class="heart-grid" id="hGrid"></div>
   </div>
 
@@ -324,6 +341,7 @@ body {
 const yesBtn = document.getElementById('yes-btn');
 const noBtn = document.getElementById('no-btn');
 const qText = document.getElementById('q-text');
+const mainGif = document.getElementById('main-gif');
 const moreBtn = document.getElementById('more-btn');
 const s1 = document.getElementById('section1');
 const s2 = document.getElementById('section2');
@@ -340,6 +358,8 @@ noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); escape(); });
 
 yesBtn.onclick = () => {
   qText.innerText = "Eu sabia! Amo-te demais! ❤️";
+  // Muda para um gif de beijo ao aceitar
+  mainGif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
   document.getElementById('btns').style.display = 'none';
   moreBtn.style.display = 'block';
   setTimeout(() => moreBtn.style.opacity = '1', 100);
@@ -366,6 +386,7 @@ function buildHeart() {
     [0,0,0,0,1,1,0,0,0,0]
   ];
   const grid = document.getElementById('hGrid');
+  grid.innerHTML = '';
   pattern.forEach((row, ri) => {
     const rDiv = document.createElement('div');
     rDiv.className = 'heart-row';
@@ -407,4 +428,3 @@ function closeCard() {
 </script>
 </body>
 </html>
-
