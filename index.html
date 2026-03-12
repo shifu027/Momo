@@ -1,195 +1,116 @@
 <!doctype html>
 <html lang="pt-PT">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-<meta property="og:title" content="Momo, tenho uma pergunta... 💕">
-<meta property="og:description" content="Fiz isto para ti, abre aqui!">
-<meta property="og:image" content="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif">
-<meta property="og:type" content="website">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 <meta name="theme-color" content="#8a6ed8">
 <title>💕 Você me ama momoooo?</title>
-
-<!-- Fonts + preload -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js">
-<link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js">
-<link rel="preload" as="script" href="https://html2canvas.hertzen.com/dist/html2canvas.min.js">
-
 <style>
 :root{
-  --primary:#8a6ed8; --accent:#cdb3ff;
-  --bg1:linear-gradient(135deg,#f7f3ff 0%,#fff9ff 100%);
+  --primary:#8a6ed8; --accent:#cdb3ff; --bg1:linear-gradient(135deg,#f7f3ff 0%,#fff9ff 100%);
   --card-bg:rgba(255,255,255,0.92); --muted:#6b627a; --shadow:0 18px 40px rgba(138,110,216,0.12);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{font-family:"Poppins",sans-serif;background:var(--bg1);color:#222;min-height:100vh;overflow-x:hidden}
-
-/* Layout */
-.section{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 18px;position:relative}
-.container{width:100%;max-width:760px;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0.65),rgba(255,255,255,0.45));border-radius:28px;padding:26px;box-shadow:var(--shadow);backdrop-filter:blur(8px);border:1px solid rgba(139,111,216,0.07)}
-.media-wrap{width:100%;max-width:420px;margin:0 auto 18px;border-radius:18px;overflow:hidden;background:#efe9ff;box-shadow:0 6px 18px rgba(138,110,216,0.06) inset}
-#main-media{display:block;width:100%;height:auto}
-
-/* typography */
-.title{font-size:2rem;font-weight:800;color:var(--primary);margin-bottom:10px;letter-spacing:.2px}
-
-/* buttons */
-.btns{display:flex;gap:14px;justify-content:center;margin-top:18px;flex-wrap:wrap}
-.btn{padding:12px 26px;border-radius:999px;border:none;cursor:pointer;font-weight:700;font-size:16px;position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;box-shadow:0 10px 30px rgba(138,110,216,0.18)}
+body{font-family: 'Poppins', sans-serif; background:var(--bg1); color:#222; min-height:100vh; overflow-x:hidden}
+.section{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+.container{width:100%;max-width:760px;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0.65),rgba(255,255,255,0.45));border-radius:22px;padding:26px;box-shadow:var(--shadow);backdrop-filter:blur(8px);border:1px solid rgba(139,111,216,0.07)}
+.media-wrap{width:100%;max-width:420px;margin:0 auto 18px;border-radius:14px;overflow:hidden;background:#efe9ff}
+#main-media, #main-svg { display:block; width:100%; height:auto; }
+.title{font-size:1.9rem;font-weight:800;color:var(--primary);margin-bottom:8px}
+.btns{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.btn{padding:12px 24px;border-radius:999px;border:none;cursor:pointer;font-weight:700;font-size:15px;position:relative;overflow:hidden;transition:transform .16s,box-shadow .16s}
+.btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;box-shadow:0 10px 26px rgba(138,110,216,0.16)}
 .btn-ghost{background:#fff;color:var(--muted);border:1px solid rgba(0,0,0,0.06)}
 .ripple{position:absolute;border-radius:50%;transform:scale(0);opacity:.6;pointer-events:none}
-
-/* section 2 scene */
+#more-btn{display:none;margin-top:14px}
 #section2{display:none;flex-direction:column;align-items:center;justify-content:center;padding:14px;overflow:hidden}
-.scene{position:relative;z-index:2;text-align:center;max-width:820px;width:100%}
-.kawaii-wrap{display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap}
-.character-box{width:180px;height:210px;position:relative;transform-style:preserve-3d;will-change:transform}
-.kawaii-svg{width:100%;height:100%;display:block;transform-origin:center center;transition:transform .25s ease}
-.heart-grid{display:flex;flex-direction:column;gap:4px;margin-top:6px;align-items:center}
+.kawaii-svg{width:170px;height:200px;display:block}
+.heart-grid{display:flex;flex-direction:column;gap:4px;margin-top:10px;align-items:center}
 .heart-row{display:flex;gap:4px}
-.h-unit{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:18px;animation:beat 1.8s infinite}
+.h-unit{width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;animation:beat 1.8s infinite}
 @keyframes beat{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.25);opacity:1;filter:drop-shadow(0 0 6px var(--primary))}}
-
-/* overlay + card */
-.overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(138,110,216,0.08);backdrop-filter:blur(6px);z-index:120;opacity:0;pointer-events:none;transition:opacity .25s}
+.overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(138,110,216,0.08);backdrop-filter:blur(6px);z-index:120;opacity:0;pointer-events:none;transition:opacity .18s}
 .overlay.show{opacity:1;pointer-events:all}
-.card{background:var(--card-bg);padding:26px;border-radius:18px;box-shadow:var(--shadow);max-width:420px;width:92%;text-align:center;border:1px solid rgba(139,111,216,0.08)}
-.controls{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-
-/* particles canvas */
+.card{background:var(--card-bg);padding:22px;border-radius:16px;box-shadow:var(--shadow);max-width:420px;width:92%;text-align:center;border:1px solid rgba(139,111,216,0.06)}
 #particle-canvas{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:110}
-
-/* hint + error */
-.hint{position:absolute;bottom:28px;color:var(--primary);font-weight:700;z-index:3;pointer-events:none;opacity:.95}
+.hint{position:absolute;bottom:20px;color:var(--primary);font-weight:700;pointer-events:none}
 #errorBanner{position:fixed;left:12px;right:12px;top:12px;background:#fff0f6;border:1px solid rgba(138,110,216,0.25);color:#5a0020;padding:10px;border-radius:10px;z-index:9999;display:none}
 #errorBanner.show{display:block}
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce){.h-unit,.kawaii-svg,.btn,.card,.scene{animation:none!important;transition:none!important}.particle{display:none!important}}
-
-/* responsive */
-@media (max-width:520px){.title{font-size:1.6rem}.character-box{width:150px;height:160px}.media-wrap{max-width:340px}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
 <div id="errorBanner" role="alert" aria-live="polite"></div>
-
-<!-- canvas high performance particles -->
 <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
 <!-- SECTION 1 -->
 <section id="section1" class="section" aria-label="Tela inicial">
-  <div class="container" role="main">
-    <div class="media-wrap" aria-hidden="false">
-      <!-- INLINE ANIMATED SVG (substitui um GIF/WebM — único ficheiro) -->
-      <div id="main-media" aria-label="Animação">
-        <!-- Um SVG animado leve, loop e compatível -->
+  <div class="container">
+    <div class="media-wrap">
+      <!-- GIF principal (externo). onerror -> tenta fallback de GIF secundário -> se falhar coloca SVG inline -->
+      <img id="main-gif"
+           src="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif"
+           alt="Animação"
+           style="width:100%;display:block"
+           crossorigin="anonymous">
+      <!-- hidden SVG fallback (usado se a img falhar) -->
+      <div id="main-svg" style="display:none;padding:8px;">
+        <!-- simples ilustração estática/animada como fallback -->
         <svg viewBox="0 0 480 270" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-          <defs>
-            <linearGradient id="g1" x1="0" x2="1">
-              <stop offset="0" stop-color="#cdb3ff"/>
-              <stop offset="1" stop-color="#8a6ed8"/>
-            </linearGradient>
-            <filter id="blurMe"><feGaussianBlur stdDeviation="10"/></filter>
-          </defs>
-
-          <rect width="100%" height="100%" rx="14" fill="url(#g1)" opacity="0.14"/>
-          <!-- floating heart group -->
-          <g id="hearts" transform="translate(240,120)">
-            <g id="heart1" transform="translate(-90,-10)">
-              <path d="M0 -8 C 6 -28, 34 -28, 40 -8 C 46 -28, 74 -28, 80 -8 C 80 8, 40 36, 0 -8 Z" fill="#fff" opacity="0.9"/>
-              <path d="M0 -8 C 6 -28, 34 -28, 40 -8 C 46 -28, 74 -28, 80 -8 C 80 8, 40 36, 0 -8 Z" fill="url(#g1)" opacity="0.22" filter="url(#blurMe)"/>
-            </g>
-            <g id="heart2" transform="translate(0,2)">
-              <path d="M0 -8 C 6 -26, 32 -26, 38 -8 C 44 -26, 70 -26, 76 -8 C 76 8, 38 34, 0 -8 Z" fill="#fff" opacity="0.95"/>
-              <path d="M0 -8 C 6 -26, 32 -26, 38 -8 C 44 -26, 70 -26, 76 -8 C 76 8, 38 34, 0 -8 Z" fill="url(#g1)" opacity="0.18"/>
-            </g>
-            <g id="heart3" transform="translate(90,-6)">
-              <path d="M0 -8 C 6 -20, 28 -20, 34 -8 C 40 -20, 62 -20, 68 -8 C 68 6, 34 28, 0 -8 Z" fill="#fff" opacity="0.92"/>
-              <path d="M0 -8 C 6 -20, 28 -20, 34 -8 C 40 -20, 62 -20, 68 -8 C 68 6, 34 28, 0 -8 Z" fill="url(#g1)" opacity="0.16"/>
-            </g>
+          <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#cdb3ff"/><stop offset="1" stop-color="#8a6ed8"/></linearGradient></defs>
+          <rect width="100%" height="100%" rx="12" fill="url(#g1)" opacity=".12"/>
+          <g transform="translate(240,120)">
+            <text x="0" y="0" text-anchor="middle" alignment-baseline="middle" font-size="36" fill="#fff">💜</text>
           </g>
-
-          <!-- gentle animated clouds -->
-          <g id="clouds" fill="#ffffff" opacity="0.12">
-            <ellipse cx="80" cy="30" rx="70" ry="18"/>
-            <ellipse cx="380" cy="40" rx="80" ry="20"/>
-          </g>
-
-          <!-- subtle shimmer -->
-          <rect x="0" y="0" width="480" height="270" fill="white" opacity="0">
-            <animate attributeName="opacity" values="0;0.02;0" dur="4s" repeatCount="indefinite"/>
-          </rect>
-
-          <!-- tiny pulse on hearts using SMIL (safe, lightweight) -->
-          <animateTransform xlink:href="#heart1" attributeName="transform" type="translate" values="-90,-12;-90,-18;-90,-12" dur="2.6s" repeatCount="indefinite"/>
-          <animateTransform xlink:href="#heart2" attributeName="transform" type="translate" values="0,0;0,-8;0,0" dur="2.2s" repeatCount="indefinite"/>
-          <animateTransform xlink:href="#heart3" attributeName="transform" type="translate" values="90,-6;90,-14;90,-6" dur="2.8s" repeatCount="indefinite"/>
-          <animateTransform xlink:href="#hearts" attributeName="transform" type="rotate" values="0;2;-2;0" dur="6s" repeatCount="indefinite"/>
         </svg>
       </div>
     </div>
 
     <h1 class="title" id="q-text">Você me ama momoooo? para Thaiza Rangel</h1>
 
-    <div class="btns" id="btns" aria-hidden="false">
+    <div class="btns" id="btns">
       <button class="btn btn-primary" id="yes-btn" aria-label="Sim">Sim</button>
       <button class="btn btn-ghost" id="no-btn" aria-label="Não">Não</button>
     </div>
 
-    <button id="more-btn" class="btn" style="margin-top:18px;border-radius:40px;display:none">Aperte aqui 💕</button>
+    <button class="btn" id="more-btn" aria-hidden="true">Aperte aqui 💕</button>
   </div>
 </section>
 
 <!-- SECTION 2 -->
 <section id="section2" class="section" aria-hidden="true">
-  <div class="scene" id="scene">
-    <div class="kawaii-wrap">
-      <div class="character-box body-float" id="charBox">
-        <div style="position:absolute;left:78%;top:-12px;background:var(--card-bg);padding:6px 10px;border-radius:12px;border:1px solid rgba(139,111,216,0.08);font-weight:800;color:var(--primary);box-shadow:0 6px 14px rgba(138,110,216,0.06)">Te AMO MOMOO!</div>
-        <!-- SIMPLE KAWAII SVG (same visual style as before) -->
-        <svg class="kawaii-svg" viewBox="0 0 140 160" id="kawaiiSvg" role="img" aria-hidden="true">
-          <ellipse cx="70" cy="150" rx="35" ry="6" fill="#000" opacity="0.04" />
-          <path d="M40 100 Q70 85 100 100 V130 Q70 145 40 130 Z" fill="white" stroke="#333" stroke-width="3.5" />
-          <circle cx="70" cy="65" r="45" fill="white" stroke="#333" stroke-width="3.5" />
-          <circle cx="35" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
-          <circle cx="105" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
-          <circle cx="35" cy="35" r="6" fill="#ffe3ee" />
-          <circle cx="105" cy="35" r="6" fill="#ffe3ee" />
-          <g id="eyes">
-            <ellipse cx="55" cy="65" rx="6" ry="5" fill="#333"/>
-            <ellipse cx="85" cy="65" rx="6" ry="5" fill="#333"/>
-          </g>
-          <g id="blush" opacity="0.9">
-            <circle cx="42" cy="78" r="8" fill="#e9d0ff" />
-            <circle cx="98" cy="78" r="8" fill="#e9d0ff" />
-          </g>
-          <path d="M62 82 Q70 90 78 82" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round" />
-          <g id="hand" transform="translate(0,0)"><path d="M100 110 Q115 110 125 90" stroke="#333" stroke-width="3.5" fill="none" stroke-linecap="round" /><circle cx="125" cy="85" r="7" fill="white" stroke="#333" stroke-width="3" /></g>
-          <g id="heartSymbol" transform="translate(0,0) scale(1)"><text x="70" y="125" text-anchor="middle" fill="var(--primary)" font-size="18">♥</text></g>
-        </svg>
-      </div>
-
-      <div class="heart-grid" id="hGrid" aria-hidden="true"></div>
+  <div style="text-align:center">
+    <div id="charWrapper" style="display:inline-block;transform-origin:center">
+      <!-- personagem kawaii (SVG) -->
+      <svg class="kawaii-svg" viewBox="0 0 140 160" id="kawaiiSvg" role="img" aria-hidden="true">
+        <ellipse cx="70" cy="150" rx="35" ry="6" fill="#000" opacity="0.05" />
+        <path d="M40 100 Q70 85 100 100 V130 Q70 145 40 130 Z" fill="white" stroke="#333" stroke-width="3.5" />
+        <circle cx="70" cy="65" r="45" fill="white" stroke="#333" stroke-width="3.5" />
+        <circle cx="35" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
+        <circle cx="105" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
+        <g id="eyes"><ellipse cx="55" cy="65" rx="6" ry="5" fill="#333"/><ellipse cx="85" cy="65" rx="6" ry="5" fill="#333"/></g>
+        <g id="blush"><circle cx="42" cy="78" r="8" fill="#e9d0ff"/><circle cx="98" cy="78" r="8" fill="#e9d0ff"/></g>
+        <path d="M62 82 Q70 90 78 82" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round" />
+        <g id="heartSymbol"><text x="70" y="125" text-anchor="middle" fill="var(--primary)" font-size="18">♥</text></g>
+      </svg>
     </div>
+
+    <div class="heart-grid" id="hGrid" aria-hidden="true"></div>
 
     <div class="hint">CLICA EM QUALQUER LUGAR ✨</div>
   </div>
 </section>
 
-<!-- overlay -->
+<!-- OVERLAY -->
 <div class="overlay" id="cardOverlay" aria-hidden="true">
   <div class="card" id="finalCard" role="dialog" aria-modal="true">
     <div style="font-size:48px">💌</div>
     <h2>Momooo, você é única!</h2>
     <p>O meu mundo é muito mais colorido contigo ao meu lado. Cada segundo é especial. ❤️</p>
-
-    <div class="controls">
+    <div style="margin-top:12px;display:flex;gap:10px;justify-content:center">
       <button class="btn btn-primary" id="shareWhatsapp">Compartilhar (WhatsApp)</button>
       <button class="btn btn-ghost" id="saveImage">Salvar como imagem</button>
       <button class="btn btn-ghost" id="closeOverlay">Fechar</button>
@@ -197,339 +118,327 @@ body{font-family:"Poppins",sans-serif;background:var(--bg1);color:#222;min-heigh
   </div>
 </div>
 
-<!-- external libs (deferred) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" defer></script>
-
+<!-- script: carregamento seguro das libs + app -->
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  try {
-    // elements
-    const yesBtn = document.getElementById('yes-btn');
-    const noBtn = document.getElementById('no-btn');
-    const moreBtn = document.getElementById('more-btn');
-    const qText = document.getElementById('q-text');
-    const s1 = document.getElementById('section1');
-    const s2 = document.getElementById('section2');
-    const hGrid = document.getElementById('hGrid');
-    const particleCanvas = document.getElementById('particle-canvas');
-    const overlay = document.getElementById('cardOverlay');
-    const closeOverlayBtn = document.getElementById('closeOverlay');
-    const shareWhatsapp = document.getElementById('shareWhatsapp');
-    const saveImage = document.getElementById('saveImage');
-    const errorBanner = document.getElementById('errorBanner');
-    const mainMedia = document.getElementById('main-media');
-    const kawaiiSvg = document.getElementById('kawaiiSvg');
-    const heartSymbol = document.getElementById('heartSymbol');
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* ---------- Helpers para carregar scripts com timeout ---------- */
+function loadScript(url, timeout = 7000) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    let done = false;
+    s.src = url;
+    s.async = true;
+    s.onload = () => { if(done) return; done = true; resolve(); };
+    s.onerror = (e) => { if(done) return; done = true; reject(new Error('failed to load ' + url)); };
+    document.head.appendChild(s);
+    setTimeout(() => { if(done) return; done = true; reject(new Error('timeout loading ' + url)); }, timeout);
+  });
+}
 
-    // small UI helpers
-    function showError(msg){
-      errorBanner.textContent = msg;
-      errorBanner.classList.add('show');
-      setTimeout(() => errorBanner.classList.remove('show'), 6000);
-    }
+/* ---------- Inicialização segura: tenta carregar libs mas funciona mesmo sem elas ---------- */
+async function safeInit() {
+  const libPromises = [
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js').catch(()=>null),
+    loadScript('https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js').catch(()=>null),
+    loadScript('https://html2canvas.hertzen.com/dist/html2canvas.min.js').catch(()=>null)
+  ];
+  // espera carregamento (ou timeout) mas não falha se alguma lib não carregar
+  await Promise.all(libPromises);
+  initApp();
+}
 
-    // sound (WebAudio small beep)
-    let audioCtx = null;
-    function playClick() {
-      try {
-        if (prefersReduced) return;
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const o = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        o.type = 'sine';
-        o.frequency.value = 600;
-        g.gain.value = 0.0001;
-        o.connect(g); g.connect(audioCtx.destination);
-        const now = audioCtx.currentTime;
-        g.gain.setValueAtTime(0.0001, now);
-        g.gain.exponentialRampToValueAtTime(0.15, now + 0.01);
-        o.start(now);
-        g.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
-        o.stop(now + 0.19);
-      } catch (e) { console.warn('sound err', e); }
-    }
+/* ---------- App: robusto e defensivo ---------- */
+function initApp(){
+  // elementos
+  const yesBtn = document.getElementById('yes-btn');
+  const noBtn  = document.getElementById('no-btn');
+  const moreBtn = document.getElementById('more-btn');
+  const qText = document.getElementById('q-text');
+  const s1 = document.getElementById('section1');
+  const s2 = document.getElementById('section2');
+  const hGrid = document.getElementById('hGrid');
+  const particleCanvas = document.getElementById('particle-canvas');
+  const overlay = document.getElementById('cardOverlay');
+  const closeOverlayBtn = document.getElementById('closeOverlay');
+  const shareWhatsapp = document.getElementById('shareWhatsapp');
+  const saveImage = document.getElementById('saveImage');
+  const errorBanner = document.getElementById('errorBanner');
+  const mainGif = document.getElementById('main-gif');
+  const mainSvgWrapper = document.getElementById('main-svg');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function vibrate(ms) { if (navigator.vibrate && !prefersReduced) navigator.vibrate(ms); }
-
-    // ripple
-    function addRipple(e){
-      const btn = e.currentTarget;
-      const rect = btn.getBoundingClientRect();
-      const d = Math.max(rect.width, rect.height) * 1.6;
-      const span = document.createElement('span');
-      span.className = 'ripple';
-      span.style.width = span.style.height = d + 'px';
-      const x = (e.clientX || rect.left + rect.width/2) - rect.left - d/2;
-      const y = (e.clientY || rect.top + rect.height/2) - rect.top - d/2;
-      span.style.left = x + 'px';
-      span.style.top = y + 'px';
-      span.style.background = 'rgba(255,255,255,0.35)';
-      span.style.transition = 'transform .6s ease, opacity .6s ease';
-      span.style.transform = 'scale(0)';
-      btn.appendChild(span);
-      requestAnimationFrame(() => {
-        span.style.transform = 'scale(1)';
-        span.style.opacity = '0';
-      });
-      setTimeout(() => span.remove(), 700);
-    }
-
-    // entry animation (GSAP)
-    function runEntryAnim(){
-      try {
-        if (prefersReduced) { s1.style.opacity = '1'; return; }
-        if (window.gsap) {
-          const tl = gsap.timeline();
-          tl.from('#main-media', { opacity: 0, y: 26, duration: 0.8 });
-          tl.from('#q-text', { opacity: 0, y: 18, duration: 0.5 }, "-=0.4");
-          tl.from('.btn', { opacity: 0, y: 10, stagger: 0.08, duration: 0.45 }, "-=0.35");
-        } else s1.style.opacity = '1';
-      } catch (e) { console.warn('entry anim fail', e); }
-    }
-    setTimeout(runEntryAnim, 200);
-
-    // NO button逃脱
-    function moveNoBtn(){
-      const marginX = 90, marginY = 70;
-      const maxX = Math.max(window.innerWidth - marginX, 20);
-      const maxY = Math.max(window.innerHeight - marginY, 40);
-      const x = Math.floor(Math.random() * maxX);
-      const y = Math.floor(Math.random() * maxY);
-      noBtn.style.position = 'fixed';
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
-    }
-    noBtn.addEventListener('pointerenter', (e) => { moveNoBtn(); playClick(); vibrate(12); });
-
-    // YES behavior
-    yesBtn.addEventListener('click', (e) => {
-      try {
-        addRipple(e);
-        playClick();
-        vibrate(18);
-        if (window.confetti && !prefersReduced) {
-          confetti({ particleCount: 90, spread: 70, origin: { y: 0.55 }, colors: ['#8a6ed8','#cdb3ff','#f7eaff'] });
-        }
-        qText.innerText = "Eu sabia! Amo-te demais! ❤️";
-        document.getElementById('btns').style.display = 'none';
-        moreBtn.style.display = 'inline-block';
-        moreBtn.style.opacity = '1';
-        moreBtn.classList.add('visible');
-      } catch (err) { console.error(err); showError('Erro na ação "Sim".'); }
-    });
-
-    // more -> section2
-    moreBtn.addEventListener('click', (e) => {
-      addRipple(e);
-      s1.style.opacity = '0';
-      setTimeout(() => {
-        s1.style.display = 'none';
-        s2.style.display = 'flex';
-        s2.classList.add('visible');
-        s2.setAttribute('aria-hidden', 'false');
-        buildHeart();
-        if (window.gsap && !prefersReduced) {
-          gsap.from('#charBox', { opacity: 0, y: 24, duration: 0.6 });
-          gsap.from('#hGrid', { opacity: 0, y: 18, duration: 0.6, delay: 0.08 });
-        }
-      }, 500);
-    });
-
-    // build heart grid
-    function buildHeart() {
-      const pattern = [
-        [0,0,1,1,0,0,1,1,0,0],
-        [0,1,1,1,1,1,1,1,1,0],
-        [1,1,1,1,1,1,1,1,1,1],
-        [1,1,1,1,1,1,1,1,1,1],
-        [0,1,1,1,1,1,1,1,1,0],
-        [0,0,1,1,1,1,1,1,0,0],
-        [0,0,0,1,1,1,1,0,0,0],
-        [0,0,0,0,1,1,0,0,0,0]
-      ];
-      hGrid.innerHTML = '';
-      pattern.forEach((row, ri) => {
-        const rDiv = document.createElement('div');
-        rDiv.className = 'heart-row';
-        row.forEach((cell, ci) => {
-          const span = document.createElement('div');
-          if (cell) {
-            span.className = 'h-unit';
-            span.innerText = '❤️';
-            span.style.animationDelay = (ri * 0.12 + ci * 0.04) + 's';
-          } else {
-            span.style.width = '28px';
-            span.style.height = '28px';
-          }
-          rDiv.appendChild(span);
-        });
-        hGrid.appendChild(rDiv);
-      });
-    }
-
-    // particles (canvas)
-    const ctx = particleCanvas.getContext ? particleCanvas.getContext('2d') : null;
-    let particles = [];
-    function resizeCanvas(){
-      const dpr = window.devicePixelRatio || 1;
-      particleCanvas.width = Math.floor(window.innerWidth * dpr);
-      particleCanvas.height = Math.floor(window.innerHeight * dpr);
-      particleCanvas.style.width = window.innerWidth + 'px';
-      particleCanvas.style.height = window.innerHeight + 'px';
-      if (ctx) ctx.setTransform(dpr,0,0,dpr,0,0);
-    }
-    resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-
-    function spawnParticles(x,y,count=20){
-      if (!ctx || prefersReduced) return;
-      for (let i=0;i<count;i++){
-        particles.push({
-          x, y,
-          vx: (Math.random()*2-1)*3,
-          vy: (Math.random()*-3 - 1),
-          life: 0,
-          ttl: 60 + Math.random()*40,
-          size: 8 + Math.random()*14,
-          rot: Math.random()*Math.PI*2,
-          type: Math.floor(Math.random()*3)
-        });
-      }
-    }
-
-    function renderParticles(){
-      if (!ctx) return;
-      ctx.clearRect(0,0,particleCanvas.width, particleCanvas.height);
-      for (let i = particles.length - 1; i >= 0; i--){
-        const p = particles[i];
-        p.vy += 0.08;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.rot += 0.1;
-        p.life++;
-        const alpha = Math.max(0, 1 - p.life / p.ttl);
-        ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rot);
-        if (p.type === 0){
-          ctx.fillStyle = '#8a6ed8'; ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
-        } else if (p.type === 1){
-          ctx.fillStyle = '#cdb3ff'; ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill();
-        } else {
-          ctx.font = (p.size+2) + 'px serif'; ctx.fillStyle = '#f7eaff'; ctx.fillText('❤', -p.size/2, p.size/2);
-        }
-        ctx.restore();
-        if (p.life > p.ttl) particles.splice(i,1);
-      }
-      requestAnimationFrame(renderParticles);
-    }
-    renderParticles();
-
-    // section2 click -> particles + overlay
-    s2.addEventListener('pointerdown', (ev) => {
-      try {
-        const x = ev.clientX || window.innerWidth/2;
-        const y = ev.clientY || window.innerHeight/2;
-        spawnParticles(x,y,28);
-        playClick(); vibrate(10);
-        setTimeout(() => {
-          overlay.classList.add('show');
-          overlay.setAttribute('aria-hidden','false');
-        }, 300);
-      } catch (e) { console.warn(e); }
-    });
-
-    closeOverlayBtn.addEventListener('click', () => {
-      overlay.classList.remove('show');
-      overlay.setAttribute('aria-hidden','true');
-    });
-
-    // parallax
-    (function enableParallax(){
-      if (prefersReduced) return;
-      const elem = document.getElementById('charBox');
-      window.addEventListener('pointermove', (e) => {
-        const midX = window.innerWidth/2, midY = window.innerHeight/2;
-        const dx = (e.clientX - midX) / midX;
-        const dy = (e.clientY - midY) / midY;
-        const rotateY = dx * 6;
-        const rotateX = dy * -4;
-        elem.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
-        kawaiiSvg.style.transform = `translateZ(10px) translateY(${dy*6}px) translateX(${dx*6}px)`;
-        heartSymbol.style.transform = `scale(${1 + Math.abs(dx+dy)*0.06})`;
-      });
-      window.addEventListener('deviceorientation', (ev) => {
-        if (!ev.gamma && !ev.beta) return;
-        const gx = ev.gamma || 0, by = ev.beta || 0;
-        elem.style.transform = `perspective(600px) rotateX(${by/10}deg) rotateY(${gx/8}deg)`;
-      }, true);
-    })();
-
-    // share to whatsapp
-    shareWhatsapp.addEventListener('click', () => {
-      const text = encodeURIComponent('Momooo, você é única! 💜 Abre isto: ' + location.href);
-      const url = `https://api.whatsapp.com/send?text=${text}`;
-      window.open(url, '_blank');
-    });
-
-    // save as image (html2canvas)
-    saveImage.addEventListener('click', async () => {
-      try {
-        const c = document.getElementById('finalCard');
-        if (window.html2canvas) {
-          saveImage.disabled = true;
-          saveImage.textContent = 'Gerando...';
-          const canvas = await html2canvas(c, { backgroundColor: null, scale: Math.min(2, window.devicePixelRatio || 1) });
-          const data = canvas.toDataURL('image/png');
-          const a = document.createElement('a');
-          a.href = data;
-          a.download = 'momooo.png';
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          saveImage.textContent = 'Salvar como imagem';
-          saveImage.disabled = false;
-        } else showError('Erro: html2canvas não carregado.');
-      } catch (e) { console.error(e); showError('Não foi possível salvar a imagem.'); }
-    });
-
-    // keyboard close
-    document.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Escape') {
-        overlay.classList.remove('show');
-        overlay.setAttribute('aria-hidden','true');
-      }
-    });
-
-    // attach ripple to interactive controls
-    [yesBtn, noBtn, moreBtn, shareWhatsapp, saveImage, closeOverlayBtn].forEach(btn => {
-      if (!btn) return;
-      btn.addEventListener('pointerdown', addRipple);
-    });
-
-    // global error handlers
-    window.addEventListener('error', (evt) => { console.error('Global error', evt); showError('Ocorreu um erro inesperado. Vê o console.'); });
-    window.addEventListener('unhandledrejection', (evt) => { console.error('Unhandled rejection', evt); showError('Problema numa promessa não tratada.'); });
-
-    // resume audio on first gesture
-    document.addEventListener('pointerdown', () => { if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{}); }, { once: true });
-
-    // allow media playback after user interaction (if needed)
-    document.addEventListener('pointerup', () => {
-      // if you later replace SVG by a video element, this will attempt to play it after a first gesture
-      const vid = document.querySelector('video');
-      if (vid && vid.paused) vid.play().catch(()=>{});
-    }, { once: true });
-
-  } catch (err) {
-    console.error('Init Error', err);
-    const b = document.getElementById('errorBanner');
-    if (b) { b.textContent = 'Erro ao iniciar a página. Recarrega e verifica o console.'; b.classList.add('show'); }
+  function showError(msg){
+    errorBanner.textContent = msg;
+    errorBanner.classList.add('show');
+    setTimeout(()=> errorBanner.classList.remove('show'), 6000);
   }
-});
+
+  // protege chamadas a confetti / html2canvas
+  function safeConfetti(opts){
+    try{
+      if (typeof confetti === 'function') confetti(opts);
+    } catch(e) { console.warn('confetti fail', e); }
+  }
+
+  // som curto via WebAudio
+  let audioCtx = null;
+  function playClick(){
+    try{
+      if(prefersReduced) return;
+      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = 600;
+      o.connect(g); g.connect(audioCtx.destination);
+      const now = audioCtx.currentTime;
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.exponentialRampToValueAtTime(0.15, now + 0.01);
+      o.start(now);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+      o.stop(now + 0.19);
+    }catch(e){ console.warn('sound err', e); }
+  }
+  function vibrate(ms){ if(navigator.vibrate && !prefersReduced) navigator.vibrate(ms); }
+
+  // ripple
+  function addRipple(e){
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const d = Math.max(rect.width, rect.height) * 1.6;
+    const span = document.createElement('span');
+    span.className = 'ripple';
+    span.style.width = span.style.height = d + 'px';
+    const x = (e.clientX || rect.left + rect.width/2) - rect.left - d/2;
+    const y = (e.clientY || rect.top + rect.height/2) - rect.top - d/2;
+    span.style.left = x + 'px'; span.style.top = y + 'px';
+    span.style.background = 'rgba(255,255,255,0.35)';
+    span.style.transition = 'transform .6s ease, opacity .6s ease';
+    span.style.transform = 'scale(0)';
+    btn.appendChild(span);
+    requestAnimationFrame(()=> { span.style.transform='scale(1)'; span.style.opacity='0'; });
+    setTimeout(()=> span.remove(),700);
+  }
+
+  // entrada suave com GSAP se disponível
+  function runEntryAnim(){
+    try{
+      if(prefersReduced){ s1.style.opacity='1'; return; }
+      if(window.gsap && typeof gsap.from === 'function'){
+        const tl = gsap.timeline();
+        tl.from('#main-gif', {opacity:0, y:26, duration:0.8});
+        tl.from('#q-text', {opacity:0, y:18, duration:0.5}, "-=0.4");
+        tl.from('.btn', {opacity:0, y:10, stagger:0.08, duration:0.45}, "-=0.35");
+      } else s1.style.opacity='1';
+    }catch(e){ console.warn('entry anim fail', e); s1.style.opacity='1' }
+  }
+  setTimeout(runEntryAnim, 220);
+
+  // caso o GIF não carregue, tenta outro GIF; se falhar, mostra o SVG fallback
+  mainGif.addEventListener('error', () => {
+    try{
+      // tenta outra URL (fallback)
+      if(mainGif.src.indexOf('tkthao219') !== -1){
+        mainGif.src = 'https://media.tenor.com/2U9G0yGkG9AAAAAi/love.gif';
+      } else {
+        // exibe SVG fallback
+        mainGif.style.display = 'none';
+        if(mainSvgWrapper) mainSvgWrapper.style.display = 'block';
+      }
+    } catch(e){ console.warn('gif fallback fail', e); }
+  });
+
+  // No-button "escapa"
+  function moveNoBtn(){
+    const marginX = 80, marginY = 60;
+    const maxX = Math.max(window.innerWidth - marginX, 20);
+    const maxY = Math.max(window.innerHeight - marginY, 40);
+    const x = Math.floor(Math.random() * maxX);
+    const y = Math.floor(Math.random() * maxY);
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+  }
+  noBtn.addEventListener('pointerenter', (e) => { moveNoBtn(); playClick(); vibrate(12); });
+
+  // Sim -> confetti seguro, troca texto, mostra botão "mais"
+  yesBtn.addEventListener('click', (e) => {
+    try{
+      addRipple(e); playClick(); vibrate(18);
+      safeConfetti({ particleCount: 80, spread: 70, origin: { y: 0.55 }, colors: ['#8a6ed8','#cdb3ff','#f7eaff'] });
+      qText.innerText = "Eu sabia! Amo-te demais! ❤️";
+      document.getElementById('btns').style.display = 'none';
+      moreBtn.style.display = 'inline-block';
+      moreBtn.setAttribute('aria-hidden', 'false');
+    }catch(err){ console.error(err); showError('Erro ao processar resposta "Sim".') }
+  });
+
+  // botão "mais" -> secção 2 (cria grid)
+  moreBtn.addEventListener('click', (e) => {
+    addRipple(e);
+    s1.style.opacity = '0';
+    setTimeout(()=> {
+      s1.style.display = 'none';
+      s2.style.display = 'flex';
+      s2.setAttribute('aria-hidden','false');
+      buildHeart();
+    }, 420);
+  });
+
+  // constrói grid de corações
+  function buildHeart(){
+    const pattern = [
+      [0,0,1,1,0,0,1,1,0,0],
+      [0,1,1,1,1,1,1,1,1,0],
+      [1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1],
+      [0,1,1,1,1,1,1,1,1,0],
+      [0,0,1,1,1,1,1,1,0,0],
+      [0,0,0,1,1,1,1,0,0,0],
+      [0,0,0,0,1,1,0,0,0,0]
+    ];
+    hGrid.innerHTML = '';
+    pattern.forEach((row,ri)=> {
+      const r = document.createElement('div'); r.className='heart-row';
+      row.forEach((c,ci)=> {
+        const s = document.createElement('div');
+        if(c){ s.className='h-unit'; s.innerText='❤️'; s.style.animationDelay = ((ri*0.12)+(ci*0.04))+'s'; }
+        else { s.style.width='26px'; s.style.height='26px'; }
+        r.appendChild(s);
+      });
+      hGrid.appendChild(r);
+    });
+  }
+
+  // Partículas em canvas
+  const ctx = particleCanvas.getContext ? particleCanvas.getContext('2d') : null;
+  let particles = [];
+  function resizeCanvas(){
+    const dpr = window.devicePixelRatio || 1;
+    particleCanvas.width = Math.floor(window.innerWidth * dpr);
+    particleCanvas.height = Math.floor(window.innerHeight * dpr);
+    particleCanvas.style.width = window.innerWidth + 'px';
+    particleCanvas.style.height = window.innerHeight + 'px';
+    if(ctx) ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+
+  function spawnParticles(x,y,count=18){
+    if(!ctx || prefersReduced) return;
+    for(let i=0;i<count;i++){
+      particles.push({
+        x,y,
+        vx:(Math.random()*2-1)*3,
+        vy:(Math.random()*-3 - 1),
+        life:0,
+        ttl:60 + Math.random()*40,
+        size:8 + Math.random()*12,
+        rot:Math.random()*Math.PI*2,
+        type:Math.floor(Math.random()*3)
+      });
+    }
+  }
+  function renderParticles(){
+    if(!ctx) return;
+    ctx.clearRect(0,0,particleCanvas.width, particleCanvas.height);
+    for(let i=particles.length-1;i>=0;i--){
+      const p = particles[i];
+      p.vy += 0.08;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += 0.1;
+      p.life++;
+      const alpha = Math.max(0, 1 - p.life / p.ttl);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      if(p.type===0){ ctx.fillStyle = '#8a6ed8'; ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size); }
+      else if(p.type===1){ ctx.fillStyle = '#cdb3ff'; ctx.beginPath(); ctx.arc(0,0,p.size/2,0,Math.PI*2); ctx.fill(); }
+      else { ctx.font = (p.size+2) + 'px serif'; ctx.fillStyle = '#f7eaff'; ctx.fillText('❤', -p.size/2, p.size/2); }
+      ctx.restore();
+      if(p.life > p.ttl) particles.splice(i,1);
+    }
+    requestAnimationFrame(renderParticles);
+  }
+  renderParticles();
+
+  // clique na cena cria partículas + abre card
+  s2.addEventListener('pointerdown', (ev) => {
+    try{
+      const x = ev.clientX || window.innerWidth/2;
+      const y = ev.clientY || window.innerHeight/2;
+      spawnParticles(x,y,26);
+      playClick(); vibrate(10);
+      setTimeout(()=> {
+        overlay.classList.add('show'); overlay.setAttribute('aria-hidden','false');
+      }, 260);
+    }catch(e){ console.warn(e); }
+  });
+
+  closeOverlayBtn.addEventListener('click', ()=> { overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); });
+
+  // parallax leve
+  (function(){
+    if(prefersReduced) return;
+    const elem = document.getElementById('charWrapper');
+    window.addEventListener('pointermove', (e)=> {
+      const midX = window.innerWidth/2, midY = window.innerHeight/2;
+      const dx = (e.clientX - midX)/midX, dy = (e.clientY - midY)/midY;
+      const rotateY = dx * 6, rotateX = dy * -4;
+      elem.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+  })();
+
+  // compartilhar whatsapp
+  shareWhatsapp.addEventListener('click', ()=> {
+    const text = encodeURIComponent('Momooo, você é única! 💜 ' + location.href);
+    window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+  });
+
+  // salvar imagem (html2canvas) — defensivo
+  saveImage.addEventListener('click', async () => {
+    try{
+      if(typeof html2canvas !== 'function'){
+        showError('Salvar não disponível (html2canvas não carregou).');
+        return;
+      }
+      saveImage.disabled = true; saveImage.textContent = 'Gerando...';
+      const canvas = await html2canvas(document.getElementById('finalCard'), { backgroundColor: null, scale: Math.min(2, devicePixelRatio || 1) });
+      const data = canvas.toDataURL('image/png');
+      const a = document.createElement('a'); a.href = data; a.download = 'momooo.png'; document.body.appendChild(a); a.click(); a.remove();
+      saveImage.textContent = 'Salvar como imagem'; saveImage.disabled = false;
+    }catch(err){ console.error(err); showError('Falha ao salvar imagem.'); saveImage.disabled = false; }
+  });
+
+  // keyboard
+  document.addEventListener('keydown', (ev) => { if(ev.key === 'Escape'){ overlay.classList.remove('show'); overlay.setAttribute('aria-hidden','true'); } });
+
+  // add ripple to buttons
+  [yesBtn, noBtn, moreBtn, shareWhatsapp, saveImage, closeOverlayBtn].forEach(b => { if(!b) return; b.addEventListener('pointerdown', addRipple); });
+
+  // handlers to resume audio/autoplay after interaction (mobile)
+  document.addEventListener('pointerdown', ()=> { if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{}); }, { once: true });
+  document.addEventListener('pointerup', ()=> { const v = document.querySelector('video'); if(v && v.paused) v.play().catch(()=>{}); }, { once: true });
+
+  // global error reporting (apresenta banner)
+  window.addEventListener('error', (evt) => {
+    console.error('Global error:', evt.error || evt.message);
+    showError('Erro: ' + (evt.message || 'ver console'));
+  });
+  window.addEventListener('unhandledrejection', (evt) => {
+    console.error('Unhandled rejection', evt.reason);
+    showError('Promessa rejeitada (ver console).');
+  });
+}
+
+/* start safe init */
+safeInit();
+
+/* Se tens console errors: copia a primeira linha vermelha no Console e cola aqui.
+   Dica rápida de como abrir o console:
+    - Desktop Chrome/Firefox: F12 → aba Console
+    - macOS Safari: Preferences → Advanced → Show Develop menu; Develop → Show Web Inspector
+    - iOS: mais difícil — testa num desktop para debug
+*/
 </script>
 </body>
 </html>
