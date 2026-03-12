@@ -4,345 +4,360 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <meta name="theme-color" content="#8a6ed8">
-
-<!-- Meta Tags para o WhatsApp -->
-<meta property="og:title" content="Momo, tenho uma pergunta... 💕">
-<meta property="og:description" content="Para Thaiza Rangel ✨">
-<meta property="og:image" content="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif">
-<meta property="og:type" content="website">
-
-<title>💕 Você me ama momoooo?</title>
+<title>Para Momo Thaíza Rangel 💜</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --primary: #8a6ed8; 
-    --primary-dark: #6b4c9a;
-    --accent: #cdb3ff; 
-    --bg-grad: linear-gradient(135deg, #f7f3ff 0%, #fff9ff 100%);
-    --card-bg: rgba(255, 255, 255, 0.95); 
-    --muted: #8b829e; 
-    --shadow: 0 15px 35px rgba(138, 110, 216, 0.15);
+    --primary: #8a6ed8;      
+    --dark: #6e54b6;         
+    --light: #b29ef0;        
+    --bg: #f7f3ff;           
+    --text: #4a3b6d;         
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   
   body { 
     font-family: 'Poppins', sans-serif; 
-    background: var(--bg-grad); 
-    color: #333; 
-    min-height: 100vh; 
-    overflow-x: hidden; 
+    background-color: var(--bg);
+    background-image: 
+      radial-gradient(rgba(178, 158, 240, 0.2) 15%, transparent 16%),
+      radial-gradient(rgba(178, 158, 240, 0.2) 15%, transparent 16%);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  /* --- ESTRUTURA --- */
-  .section {
-    width: 100%;
-    min-height: 100vh;
+  /* --- FLUXO DE ETAPAS --- */
+  .stage {
+    position: absolute;
+    inset: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    position: absolute;
-    top: 0; left: 0;
-    transition: opacity 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    z-index: 1;
   }
+  .stage.active { opacity: 1; pointer-events: all; z-index: 10; }
 
-  #section2 { display: none; opacity: 0; z-index: 5; flex-direction: column; }
-  #section2.active { display: flex; opacity: 1; }
-
-  .container {
-    width: 100%;
-    max-width: 450px;
-    text-align: center;
-    background: var(--card-bg);
-    border-radius: 30px;
-    padding: 35px 25px;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  }
-
-  @keyframes popIn {
-    0% { opacity: 0; transform: scale(0.9) translateY(20px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  /* --- CONTEÚDO --- */
-  .media-wrap {
-    width: 100%;
-    max-width: 240px;
-    margin: 0 auto 20px auto;
-    /* Removido o background e bordas do quadro para deixar só o GIF */
-  }
-
-  .media-wrap img { width: 100%; display: block; object-fit: cover; border-radius: 15px; }
-
-  /* Tipografia */
-  .title { font-size: 1.8rem; font-weight: 800; color: var(--primary-dark); line-height: 1.2; margin-bottom: 5px; }
-  .subtitle { font-size: 1.1rem; color: var(--primary); font-weight: 600; margin-bottom: 25px; }
-
-  /* --- BOTÕES --- */
-  .btns { display: flex; gap: 15px; justify-content: center; position: relative; min-height: 50px; }
-  
-  .btn {
-    padding: 14px 30px;
-    border-radius: 50px;
-    border: none;
+  /* --- ETAPA 0: CAPIVARA E ENVELOPE --- */
+  .scene {
+    position: relative;
     cursor: pointer;
-    font-weight: 700;
-    font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.2s ease;
+    text-align: center;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+  .capy-svg { width: 220px; height: auto; position: relative; z-index: 2; }
+  .paws { transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .open .paws { transform: translateY(-30px); }
+
+  /* ENVELOPE SIMPLIFICADO E SEGURO */
+  .envelope-box {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 110px;
+    z-index: 5;
   }
 
-  .btn-primary {
-    background: linear-gradient(135deg, var(--primary), #a68aee);
-    color: #fff;
-    box-shadow: 0 8px 20px rgba(138, 110, 216, 0.3);
-  }
-  .btn-primary:active { transform: scale(0.95); }
-
-  .btn-ghost {
-    background: #f0ebf8;
-    color: var(--muted);
+  .env-back {
+    position: absolute; inset: 0;
+    background: var(--dark);
+    border-radius: 8px;
+    z-index: 1;
   }
 
-  #no-btn { position: relative; z-index: 10; transition: transform 0.1s; }
-
-  #more-btn {
-    display: none;
-    margin: 20px auto 0;
-    background: linear-gradient(135deg, var(--primary), #a68aee);
-    color: white;
-    animation: pulse 2s infinite;
+  .env-front {
+    position: absolute; inset: 0;
+    background: var(--primary);
+    clip-path: polygon(0 35%, 50% 70%, 100% 35%, 100% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 35%, 50% 70%, 100% 35%, 100% 100%, 0 100%);
+    border-radius: 0 0 8px 8px;
+    z-index: 3;
   }
 
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+  .env-flap {
+    position: absolute; top: 0; left: 0; width: 100%; height: 65%;
+    background: var(--light);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform 0.6s ease;
+    z-index: 4;
+  }
+  .open .env-flap { transform: rotateX(180deg); z-index: 2; }
+
+  /* --- A NOVA CARTA (POP-UP) --- */
+  .flying-letter {
+    position: absolute;
+    bottom: 30px; /* Começa da altura do envelope */
+    left: 50%;
+    transform: translateX(-50%) scale(0) translateY(0);
+    width: 150px;
+    height: 100px;
+    background: white;
+    border-radius: 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 20; /* Fica acima de TUDO (capivara, envelope) */
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  /* --- SECÇÃO 2 --- */
-  .kawaii-svg { width: 150px; height: 180px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
+  .flying-letter p { font-size: 0.8rem; font-weight: 800; color: var(--primary); line-height: 1.2; }
   
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+  /* Animação quando a carta "salta" */
+  .scene.open .flying-letter {
+    transform: translateX(-50%) scale(1.1) translateY(-140px);
+    opacity: 1;
   }
 
-  .heart-grid { display: flex; flex-direction: column; gap: 4px; align-items: center; }
-  .heart-row { display: flex; gap: 4px; }
-  .h-unit { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; animation: beat 1.5s infinite; }
-  
-  @keyframes beat {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.3); opacity: 1; filter: drop-shadow(0 0 8px var(--primary)); }
-  }
-
-  .hint { position: absolute; bottom: 30px; color: var(--primary); font-weight: 700; opacity: 0.7; animation: pulse 2s infinite; }
-
-  /* --- OVERLAY FINAL --- */
-  .overlay {
-    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-    background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px);
-    z-index: 100; opacity: 0; pointer-events: none; transition: all 0.4s ease;
-  }
-  .overlay.show { opacity: 1; pointer-events: all; }
-
+  /* --- ETAPA 1: PERGUNTA --- */
   .card {
-    background: white; padding: 35px 25px; border-radius: 25px;
-    box-shadow: var(--shadow); max-width: 350px; width: 90%; text-align: center;
-    transform: scale(0.8); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: white;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(110, 84, 182, 0.15);
+    width: 100%; max-width: 400px;
+    text-align: center;
+    border: 3px solid white;
   }
-  .overlay.show .card { transform: scale(1); }
+  .gif-box { width: 100%; max-width: 240px; margin: 0 auto 20px; border-radius: 20px; overflow: hidden; }
+  .gif-box img { width: 100%; display: block; }
 
-  .card h2 { color: var(--primary); margin: 10px 0; font-size: 1.6rem; }
-  .card p { color: #666; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+  .btn {
+    border: none; padding: 14px 25px; border-radius: 50px;
+    font-size: 1.1rem; font-weight: 800; cursor: pointer;
+    transition: 0.3s; font-family: 'Poppins', sans-serif;
+  }
+  .btn-sim { background: var(--primary); color: white; min-width: 120px; }
+  .btn-nao { background: white; color: var(--primary); border: 2px solid var(--primary); min-width: 100px; }
 
-  #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99; }
+  /* --- ETAPA FINAL --- */
+  .heart-grid { display: flex; flex-direction: column; gap: 4px; align-items: center; margin-bottom: 30px; }
+  .heart-row { display: flex; gap: 4px; }
+  .h-unit { font-size: 24px; animation: beat 1.2s infinite; }
+  @keyframes beat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px var(--light)); } 50% { transform: scale(1.2); filter: drop-shadow(0 0 8px var(--primary)); } }
+
+  /* MODAL / OVERLAY MENSAGEM */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(74, 59, 109, 0.4);
+    backdrop-filter: blur(8px); display: none; align-items: center;
+    justify-content: center; z-index: 1000; padding: 20px;
+    opacity: 0; transition: opacity 0.4s ease;
+  }
+  .overlay.active { display: flex; opacity: 1; }
+  .msg-card {
+    background: white; padding: 30px; border-radius: 25px;
+    text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    max-width: 320px; transform: scale(0.8); transition: transform 0.4s ease;
+  }
+  .overlay.active .msg-card { transform: scale(1); }
+
+  canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 </style>
 </head>
 <body>
 
-<canvas id="canvas"></canvas>
+<canvas id="confetti"></canvas>
 
-<!-- SECÇÃO 1 -->
-<section id="section1" class="section">
-  <div class="container">
-    <div class="media-wrap">
-      <!-- GIF Principal - Sem quadro colorido -->
-      <img id="main-gif" src="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif" alt="Bubu Dudu">
+<!-- ETAPA 0: ENTRADA -->
+<section id="stage0" class="stage active">
+  <div class="scene" id="opener">
+    <svg class="capy-svg" viewBox="0 0 200 200">
+      <path d="M 50 170 C 50 70, 150 70, 150 170" fill="#a67b5b" />
+      <path d="M 55 105 C 45 95, 40 110, 55 115" fill="#8b5e3c" />
+      <path d="M 145 105 C 155 95, 160 110, 145 115" fill="#8b5e3c" />
+      <ellipse cx="100" cy="125" rx="26" ry="18" fill="#d4a373" />
+      <path d="M 72 112 Q 78 108 84 112 M 116 112 Q 122 108 128 112" stroke="#4a3b6d" stroke-width="3" fill="none" />
+      <polygon points="95,120 105,120 100,126" fill="#4a3b6d" />
+      <path d="M 100 126 L 100 134 M 88 134 Q 100 140 112 134" stroke="#4a3b6d" stroke-width="2.5" fill="none" />
+      <circle cx="68" cy="128" r="7" fill="#ffcdd2" opacity="0.9"/>
+      <circle cx="132" cy="128" r="7" fill="#ffcdd2" opacity="0.9"/>
+      <g class="paws">
+        <circle cx="65" cy="165" r="14" fill="#5c3a21" />
+        <circle cx="135" cy="165" r="14" fill="#5c3a21" />
+      </g>
+    </svg>
+
+    <div class="envelope-box">
+      <div class="env-back"></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
     </div>
-
-    <h1 class="title" id="q-text">Você me ama, momoooo?</h1>
-    <p class="subtitle" id="sub-text">Para Thaiza Rangel 💕</p>
-
-    <div class="btns" id="btns">
-      <button class="btn btn-primary" id="yes-btn">Sim</button>
-      <button class="btn btn-ghost" id="no-btn">Não</button>
+    
+    <!-- CARTA VOADORA (Totalmente independente do envelope) -->
+    <div class="flying-letter">
+      <p>Para Momo<br>Thaíza Rangel</p>
+      <span style="font-size: 20px; margin-top: 5px;">💜</span>
     </div>
-
-    <button class="btn btn-primary" id="more-btn">Aperte aqui ✨</button>
+    
+    <h2 style="margin-top: 50px; color: var(--primary); font-weight: 800;">Toque para abrir!</h2>
   </div>
 </section>
 
-<!-- SECÇÃO 2 -->
-<section id="section2" class="section">
-  <svg class="kawaii-svg" viewBox="0 0 140 160">
-    <ellipse cx="70" cy="150" rx="35" ry="6" fill="#000" opacity="0.05" />
-    <path d="M40 100 Q70 85 100 100 V130 Q70 145 40 130 Z" fill="white" stroke="#333" stroke-width="3.5" />
-    <circle cx="70" cy="65" r="45" fill="white" stroke="#333" stroke-width="3.5" />
-    <circle cx="35" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
-    <circle cx="105" cy="35" r="12" fill="white" stroke="#333" stroke-width="3.5" />
-    <ellipse cx="55" cy="65" rx="5" ry="5" fill="#333"/>
-    <ellipse cx="85" cy="65" rx="5" ry="5" fill="#333"/>
-    <circle cx="42" cy="78" r="8" fill="#e9d0ff" opacity="0.7"/>
-    <circle cx="98" cy="78" r="8" fill="#e9d0ff" opacity="0.7"/>
-    <path d="M62 82 Q70 90 78 82" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round" />
-    <text x="70" y="125" text-anchor="middle" fill="#8a6ed8" font-size="16">♥</text>
-  </svg>
-
-  <div class="heart-grid" id="hGrid"></div>
-  <div class="hint">TOQUE NA TELA ✨</div>
+<!-- ETAPA 1: PERGUNTA -->
+<section id="stage1" class="stage">
+  <div class="card">
+    <div class="gif-box">
+      <img id="main-gif" src="https://media.tenor.com/efBNO2yWCA8AAAAi/tkthao219-bubududu.gif">
+    </div>
+    <h1 id="title">Você me ama, momoooo?</h1>
+    <div id="btn-wrap" style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+      <button class="btn btn-sim" id="yes">Sim!</button>
+      <button class="btn btn-nao" id="no">Não</button>
+    </div>
+    <button class="btn btn-sim" id="next" style="display: none; width: 100%; margin-top: 20px;">Ver surpresa ✨</button>
+  </div>
 </section>
 
-<!-- OVERLAY FINAL -->
-<div class="overlay" id="cardOverlay">
-  <div class="card">
-    <div style="font-size: 50px; margin-bottom: 10px;">💌</div>
-    <h2>Momooo, você é única!</h2>
-    <p>O meu mundo é muito mais colorido com você ao meu lado. Cada segundo é especial. ❤️</p>
-    
-    <button class="btn btn-ghost" style="width: 100%;" onclick="document.getElementById('cardOverlay').classList.remove('show')">Fechar</button>
+<!-- ETAPA 2: FINAL (Apenas Corações) -->
+<section id="stage2" class="stage" style="cursor: pointer;">
+  <div class="heart-grid" id="hGrid"></div>
+  <p style="font-weight: 600; opacity: 0.8; font-size: 1.1rem; color: var(--primary);">Toque em qualquer lugar ✨</p>
+</section>
+
+<!-- OVERLAY MENSAGEM FINAL -->
+<div class="overlay" id="msgOverlay">
+  <div class="msg-card">
+    <div style="font-size: 45px; margin-bottom: 10px; animation: float 3s infinite;">💌</div>
+    <h2 style="color: var(--primary); margin-bottom: 10px;">Momooo!</h2>
+    <p style="font-size: 0.95rem; line-height: 1.5; color: var(--text);">
+      Você é a pessoa mais especial do meu mundo. Obrigado por ser minha Thaíza Rangel! Te amo infinitamente ❤️
+    </p>
+    <button class="btn btn-nao" style="width: 100%; margin-top: 25px;" id="closeMsg">Fechar</button>
   </div>
 </div>
 
 <script>
-  const yesBtn = document.getElementById('yes-btn');
-  const noBtn = document.getElementById('no-btn');
-  const moreBtn = document.getElementById('more-btn');
-  const qText = document.getElementById('q-text');
-  const subText = document.getElementById('sub-text');
-  const mainGif = document.getElementById('main-gif');
-  const s1 = document.getElementById('section1');
-  const s2 = document.getElementById('section2');
-  const overlay = document.getElementById('cardOverlay');
+  const s0 = document.getElementById('stage0');
+  const s1 = document.getElementById('stage1');
+  const s2 = document.getElementById('stage2');
+  const opener = document.getElementById('opener');
+  const noBtn = document.getElementById('no');
+  const yesBtn = document.getElementById('yes');
+  const nextBtn = document.getElementById('next');
+  const overlay = document.getElementById('msgOverlay');
 
-  const moveNoBtn = () => {
-    if (noBtn.style.position !== 'fixed') {
-      noBtn.style.position = 'fixed';
-    }
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-    const x = Math.max(20, Math.floor(Math.random() * maxX));
-    const y = Math.max(20, Math.floor(Math.random() * maxY));
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
-  };
-
-  noBtn.addEventListener('mouseover', moveNoBtn);
-  noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNoBtn(); });
-
-  yesBtn.addEventListener('click', () => {
-    qText.innerText = "Eu sabia! Amo você demais! 💜";
-    subText.style.display = 'none';
-    mainGif.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
-    document.getElementById('btns').style.display = 'none';
-    moreBtn.style.display = 'block';
-    fireConfetti();
-  });
-
-  moreBtn.addEventListener('click', () => {
-    s1.style.opacity = '0';
+  // 1. Abertura do Envelope (Nova Animação de Salto)
+  opener.addEventListener('click', () => {
+    opener.classList.add('open'); // Faz a aba girar e a carta saltar
+    
+    // Aumentei o tempo para 2.2 segundos para ela ler a carta antes de mudar de tela
     setTimeout(() => {
-      s1.style.display = 'none';
-      s2.classList.add('active');
-      buildHeart();
-    }, 500);
+      s0.classList.remove('active');
+      s1.classList.add('active');
+    }, 2200);
   });
 
-  function buildHeart() {
-    const pattern = [
-      [0,0,1,1,0,0,1,1,0,0],
-      [0,1,1,1,1,1,1,1,1,0],
-      [1,1,1,1,1,1,1,1,1,1],
-      [1,1,1,1,1,1,1,1,1,1],
-      [0,1,1,1,1,1,1,1,1,0],
-      [0,0,1,1,1,1,1,1,0,0],
-      [0,0,0,1,1,1,1,0,0,0],
-      [0,0,0,0,1,1,0,0,0,0]
-    ];
+  // 2. Botão fugitivo
+  const moveNo = () => {
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+    noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+  };
+  noBtn.addEventListener('mouseover', moveNo);
+  noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNo(); }, { passive: false });
+
+  // 3. Resposta Sim
+  yesBtn.addEventListener('click', () => {
+    document.getElementById('title').innerText = "Eu sabia! Também te amo! 💜";
+    document.getElementById('main-gif').src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+    document.getElementById('btn-wrap').style.display = 'none';
+    nextBtn.style.display = 'block';
+    startConfetti();
+  });
+
+  // 4. Etapa Final
+  nextBtn.addEventListener('click', () => {
+    s1.classList.remove('active');
+    s2.classList.add('active');
+    drawHearts();
+  });
+
+  // 5. Clique para abrir mensagem final
+  s2.addEventListener('click', () => {
+    overlay.classList.add('active');
+  });
+  
+  // Fechar mensagem final
+  document.getElementById('closeMsg').addEventListener('click', (e) => {
+    e.stopPropagation();
+    overlay.classList.remove('active');
+  });
+
+  // Desenhar os Corações
+  function drawHearts() {
     const grid = document.getElementById('hGrid');
-    grid.innerHTML = '';
-    pattern.forEach((row, ri) => {
-      const rDiv = document.createElement('div');
-      rDiv.className = 'heart-row';
-      row.forEach((cell, ci) => {
-        const span = document.createElement('span');
-        if (cell) {
-          span.className = 'h-unit';
-          span.innerText = '💜';
-          span.style.animationDelay = `${(ri * 0.1) + (ci * 0.05)}s`;
+    const heart = [
+      [0,1,1,0,0,1,1,0],
+      [1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1],
+      [0,1,1,1,1,1,1,0],
+      [0,0,1,1,1,1,0,0],
+      [0,0,0,1,1,0,0,0]
+    ];
+    heart.forEach((row, ri) => {
+      const d = document.createElement('div');
+      d.className = 'heart-row';
+      row.forEach((c, ci) => {
+        const s = document.createElement('span');
+        s.className = 'h-unit';
+        if(c) {
+          s.innerText = '💜';
+          s.style.animationDelay = (ri*0.1 + ci*0.05) + 's';
         } else {
-          span.style.width = '24px';
+          s.style.width = '24px';
         }
-        rDiv.appendChild(span);
+        d.appendChild(s);
       });
-      grid.appendChild(rDiv);
+      grid.appendChild(d);
     });
   }
 
-  s2.addEventListener('click', () => {
-    overlay.classList.add('show');
-    fireConfetti();
-  });
-
-  const canvas = document.getElementById('canvas');
+  // --- CONFETES ---
+  const canvas = document.getElementById('confetti');
   const ctx = canvas.getContext('2d');
   let particles = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  function fireConfetti() {
-    const colors = ['#8a6ed8', '#cdb3ff', '#f7eaff', '#ff99c2'];
-    for (let i = 0; i < 100; i++) {
+  function startConfetti() {
+    for(let i=0; i<80; i++) {
       particles.push({
-        x: canvas.width / 2,
-        y: canvas.height / 2 + 100,
-        vx: (Math.random() - 0.5) * 15,
-        vy: (Math.random() - 1) * 15,
-        size: Math.random() * 8 + 4,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        life: 1
+        x: canvas.width/2, y: canvas.height/2,
+        vx: (Math.random()-0.5)*15, vy: (Math.random()-1.2)*15,
+        size: Math.random()*6+2, color: '#8a6ed8'
       });
     }
   }
 
   function render() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particles.length; i++) {
-      let p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.3;
-      p.life -= 0.01;
-      if (p.life > 0) {
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        particles.splice(i, 1);
-        i--;
-      }
-    }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach((p, i) => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.25;
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill();
+      if(p.y > canvas.height) particles.splice(i, 1);
+    });
     requestAnimationFrame(render);
   }
   render();
